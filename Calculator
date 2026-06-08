@@ -51,10 +51,3 @@ if Rounded == "y":
             print(f"ERROR! Not enough information to determine your rounded mark!")
 else:
     print(f"Your unrounded mark is {Unrounded_mark:.3f}")
-
-
-# resits
-# unclear questions
-# all courses
-# history of previous grades
-# how much you need in the future

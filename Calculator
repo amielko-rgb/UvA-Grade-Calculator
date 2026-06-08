@@ -1,0 +1,60 @@
+import math
+
+#window setup
+
+# CC = chance correction
+Total_number_of_MC_questions = float(input("Enter the total number of MC questions on the exam: "))
+Number_of_alternatives_per_question = float(input("Enter the number of alternative options per question: "))
+correction = Total_number_of_MC_questions/Number_of_alternatives_per_question
+
+#MC mark calculation
+MC_score = float(input("Enter the score gotten for MC questions: "))
+Maximum_MC_score = float(input("Enter the maximum score possible for MC questions: "))
+MC_mark = ((MC_score - correction)/(Maximum_MC_score - correction))*10
+
+#OE mark calculation
+OE_score = float(input("Enter the score gotten for OE questions: "))
+Maximum_OE_score = float(input("Enter the maximum score possible for OE questions: "))
+OE_mark = (OE_score/Maximum_OE_score)*10
+
+#total number of deduction points
+PAS_RWST = float(input("Enter the number of points deducted from PA'S or RWST assignments: "))
+Weekly_assign = float(input("Enter the number of points deducted from Weekly Assignments: "))
+Tot_no_of_dedu = PAS_RWST + Weekly_assign
+
+#The unrounded mark for all courses
+Unrounded_mark = (0.8 * MC_mark) + (0.2 * OE_mark) - Tot_no_of_dedu
+
+#report
+print(f"Your unrounded Mark: {Unrounded_mark:.3f}")
+
+
+Rounded = input("Do you want to see your rounded Mark? (y/n): ")
+if Rounded == "y":
+    if Unrounded_mark <= 6.250 and Unrounded_mark >= 5.500:
+        print(f"Your rounded mark is 6.")
+    elif Unrounded_mark >= 4.750 and Unrounded_mark <= 5.500:
+        print(f"Your rounded mark is 5.")
+    elif Unrounded_mark == 1.000 or Unrounded_mark <= 1.000:
+        print(f"Your rounded mark is 1.")
+    else:
+        decimal_part = int(f"{Unrounded_mark:.3f}".split(".")[-1])
+        if decimal_part == 0 and decimal_part <= 249:
+            print(f"Your rounded mark is {math.floor(Unrounded_mark)}.")
+        elif 250 <= decimal_part <= 749:
+            def round_to_half(x):
+                return ((round(x*2))/2)
+            print(f"Your rounded mark is {round_to_half(Unrounded_mark)}.")
+        elif 749 <= decimal_part <= 999:
+            print(f"Your rounded mark is {math.ceil(Unrounded_mark)}.")
+        else:
+            print(f"ERROR! Not enough information to determine your rounded mark!")
+else:
+    print(f"Your unrounded mark is {Unrounded_mark:.3f}")
+
+
+# resits
+# unclear questions
+# all courses
+# history of previous grades
+# how much you need in the future
